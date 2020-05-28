@@ -4,20 +4,7 @@ import { scalePoint } from 'd3-scale';
 import { range as d3Range } from 'd3-array';
 import { getYScale } from './Helper';
 
-const propTypes = {
-  width: PropTypes.number,
-  height: PropTypes.number,
-  data: PropTypes.arrayOf(PropTypes.number),
-  margin: PropTypes.shape({
-    top: PropTypes.number,
-    right: PropTypes.number,
-    bottom: PropTypes.number,
-    left: PropTypes.number,
-  }),
-};
-const defaultProps = {
-  margin: { top: 10, right: 10, bottom: 30, left: 40 },
-};
+const margin = { top: 10, right: 10, bottom: 30, left: 40 };
 
 const getXScale = (data, width, height, margin) => {
   return scalePoint()
@@ -33,7 +20,7 @@ const renderXAxis = (scale, width, height, margin) => {
 
     return (
       <g className="x-axis-tick" key={`tick-${index}`}>
-        <line x1={x} x2={x} y1={y} y2={y + 6} stroke="#808080" />
+        <line x1={x} x2={x} y1={y} y2={y + 6} stroke="#50e3c2" />
         <text x={x} y={y + 8} textAnchor="middle" dominantBaseline="hanging">{index}</text>
       </g>
     );
@@ -41,7 +28,7 @@ const renderXAxis = (scale, width, height, margin) => {
 
   return (
     <g className="x-axis">
-      <line x1={margin.left} y1={y} x2={width-margin.right} y2={y} stroke="#808080" />
+      <line x1={margin.left} y1={y} x2={width-margin.right} y2={y} stroke="#50e3c2" />
       {ticks}
     </g>
   );
@@ -55,7 +42,7 @@ const renderYAxis = (scale, width, height, margin) => {
 
     return (
       <g className="y-axis-tick" key={`tick-${index}`}>
-        <line y1={y} y2={y} x1={x - 6} x2={x} stroke="#808080" />
+        <line y1={y} y2={y} x1={x - 6} x2={x} stroke="#50e3c2" />
         <text x={x - 10} y={y} dominantBaseline="central" textAnchor="end">{entry}</text>
       </g>
     );
@@ -63,7 +50,7 @@ const renderYAxis = (scale, width, height, margin) => {
 
   return (
     <g className="y-axis">
-      <line x1={x} x2={x} y1={margin.top} y2={height - margin.bottom} stroke="#808080" />
+      <line x1={x} x2={x} y1={margin.top} y2={height - margin.bottom} stroke="#50e3c2" />
       {ticks}
     </g>
   );
@@ -86,20 +73,20 @@ const renderPath = (data, xScale, yScale) => {
       r={4}
       strokeWidth={2}
       fill="#fff"
-      stroke="#ff7300"
+      stroke="#50e3c2"
     />
   ));
 
   return (
     <g className="line">
-      <path d={path} fill="none" stroke="#ff7300" strokeWidth={2}/>
+      <path d={path} fill="none" stroke="#50e3c2" strokeWidth={2}/>
       {dots}
     </g>
   );
 };
 
 const LineChart = (props) => {
-  const { width, height, data, margin } = props;
+  const { width, height, data } = props;
   const xScale = getXScale(data, width, height, margin);
   const yScale = getYScale(data, width, height, margin);
 
@@ -114,7 +101,7 @@ const LineChart = (props) => {
   );
 };
 
-LineChart.propTypes = propTypes;
-LineChart.defaultProps = defaultProps;
+// LineChart.propTypes = propTypes;
+// LineChart.defaultProps = defaultProps;
 
 export default LineChart;

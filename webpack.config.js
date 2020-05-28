@@ -3,7 +3,6 @@ var webpack = require('webpack');
 
 module.exports = {
   context: __dirname,
-  debug: true,
   devtool: '#inline-source-map',
   entry: [
     './js/app.js',
@@ -14,12 +13,12 @@ module.exports = {
     publicPath: '/static/',
   },
   resolve: {
-    extensions: ['', '.js'],
+    extensions: ['.js'],
   },
   module: {
-    loaders: [{
+    rules: [{
       test: /\.js$/,
-      loaders: ['react-hot', 'babel-loader'],
+      loaders: ['babel-loader'],
       include: [
         __dirname,
         path.join(__dirname, '..', 'js'),
